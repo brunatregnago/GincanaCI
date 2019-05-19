@@ -8,12 +8,12 @@ class EquipeModel extends CI_Model {
     }
     
     public function insert($data = array()){
-        $this->db->insert('equipe', $data());
+        $this->db->insert('equipe', $data);
         return $this->db->affected_rows();
     }
     
-    public function getOne(){
-        $this->db->where('id',$id);
+    public function getOne($id){
+        $this->db->where('id', $id);
         $query = $this->db->get('equipe');
         return $query->row(0);
     }
@@ -31,7 +31,7 @@ class EquipeModel extends CI_Model {
     public function delete($id){
         if($id > 0){
             $this->db->where('id', $id);
-            $this->db->delete('equipe', $data);
+            $this->db->delete('equipe');
             return $this->db->affected_rows();
         }else{
             return false;

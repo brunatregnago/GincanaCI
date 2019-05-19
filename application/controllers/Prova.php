@@ -13,6 +13,8 @@ class Prova extends CI_Controller {
         parent::__construct();
         $this->load->model('LoginModel');
         $this->LoginModel->verificaLogin();
+        
+        $this->load->model('ProvaModel');
     }
 
     public function index() {//método padrão para chamar quando nenhum outro é solicitado
@@ -20,8 +22,7 @@ class Prova extends CI_Controller {
     }
 
     public function lista() {
-        $this->load->model('ProvaModel', 'pm');
-        $dados['provas'] = $this->pm->getAll();
+        $dados['provas'] = $this->ProvaModel->getAll();
         $this->load->view('Header');
         $this->load->view('ListaProva', $dados);
         $this->load->view('Footer');
@@ -38,7 +39,6 @@ class Prova extends CI_Controller {
             $this->load->view('FormProva');
             $this->load->view('Footer');
         } else {
-            $this->load->model('ProvaModel');
 
             $dados = array(
                 'nome' => $this->input->post('nome'),
@@ -59,7 +59,6 @@ class Prova extends CI_Controller {
 
     public function alterar($id) {
         if ($id > 0) {
-            $this->load->model('ProvaModel');
 
             $this->form_validation->set_rules('nome', 'nome', 'required');
             $this->form_validation->set_rules('tempo', 'tempo', 'required');
@@ -79,10 +78,10 @@ class Prova extends CI_Controller {
                     'NIntegrantes' => $this->input->post('NIntegrantes')
                 );
                 if ($this->ProvaModel->update($id, $dados)) {
-                    $this->session->set_flashdata('mensagem', 'Cliente alterado com sucesso.');
+                    $this->session->set_flashdata('mensagem', 'Alterado com sucesso.');
                     redirect('Prova/lista');
                 } else {
-                    $this->session->set_flashdata('mensagem', 'Falha ao alterar cliente.');
+                    $this->session->set_flashdata('mensagem', 'Falha ao alterar prova.');
                     redirect('Prova/alterar/' . $id);
                 }
             }
@@ -90,9 +89,8 @@ class Prova extends CI_Controller {
     }
     public function deletar($id) {
         if ($id > 0) {
-            $this->load->model('ProvaModel');
-            if ($this->ProvaModel->delete($id)) {
-                $this->session->set_flashdata('mensagem', 'Cliente deletado.');
+            if ($this->ProvaModel->delete($id > 0)) {
+                $this->session->set_flashdata('mensagem', 'Prova deletada.');
             } else {
                 $this->session->set_flashdata('mensagem', 'Falha ao deletar.');
             }

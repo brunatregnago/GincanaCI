@@ -19,7 +19,7 @@
                     $mensagem = $this->session->flashdata('mensagem');
                     echo (isset($mensagem) ? '<div class="alert alert-warning" role="alert">' . $mensagem . '</div>' : '');
                 ?>     
-                <form action="" method="POST" name="login">
+                <form action="<?=base_url('Usuario/login')?>" method="POST" name="login">
                     <div class="form-group">
                         <label for="email">E-Mail</label> 
                         <input type="text" class="form-control" name="email" id="email">
@@ -29,10 +29,13 @@
                         <input type="password" class="form-control" name="senha" id="senha">
                     </div>
 
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success mr-2">
                         <i class="fas fa-check"></i> Acessar
                     </button>
-                    
+                    <?php
+                    echo '<a class="btn btn-secondary mr-2" href="' . $this->config->base_url() . 'index.php/Usuario/cadastro/'
+                    . '">Cadastrar</a>'
+                    ?>
                 </form>
             </div>
         </div>

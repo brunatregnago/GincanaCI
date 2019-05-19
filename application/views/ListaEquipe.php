@@ -8,10 +8,12 @@ if (isset($mensagem)) {
 <div class="container">
     <br>
     <div class=" table-responsive">
+        <h5>Equipes <a href="<?= $this->config->base_url() . 'Equipe/cadastro'; ?>">[+]</a></h5>
         <table class="table table-striped table-bordered" style="text-align: center;">
             <thead>
                 <tr>
                     <th> Nome </th>
+                    <th> Operações </th>
                 </tr>
             </thead>
             <tbody>
@@ -20,10 +22,10 @@ if (isset($mensagem)) {
                     echo '<tr>';
                     echo '<td>' . $e->nome . '</td>';
                     echo '<td>'
-                    . '<a class="btn btn-warning" href="' . $this->config->base_url() . 'index.php/Equipe/alterar/'
-                    . $e->id . '">Alterar</a>'
-                    . '<a class="btn btn-danger" href="' . $this->config->base_url() . 'index.php/Equipe/deletar/'
-                    . $e->id . '">Deletar</a>'
+                    . '<a class="btn btn-warning text-white mr-2" href="' . $this->config->base_url() . 'index.php/Equipe/update/'
+                    . $e->id . '"><i class="fas fa-edit"></i></a>'
+                    . '<a class="btn btn-danger" href="' . $this->config->base_url() . 'index.php/Equipe/delete/'
+                    . $e->id . '"><i class="fas fa-trash"></i></a>'
                     . '</td>';
                     echo '</tr>';
                 }
